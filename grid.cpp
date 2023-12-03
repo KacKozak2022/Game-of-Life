@@ -16,3 +16,14 @@ void grid::allocate(int height, int width)
     }
 
 }
+
+void grid::deallocate()
+{
+
+    for(int i = 0;i < m_height+2; i++){
+        delete[] m_tab[i];
+    }
+    delete[] m_tab;
+    m_tab = nullptr;
+
+}

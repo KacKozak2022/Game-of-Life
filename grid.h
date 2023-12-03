@@ -7,7 +7,7 @@ class grid
     Q_OBJECT
     int m_height = 0;
     int m_width = 0;
-    char** m_tab;
+    char** m_tab = nullptr;
 
 public:
     grid() noexcept;
