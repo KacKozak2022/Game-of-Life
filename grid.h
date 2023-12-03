@@ -12,6 +12,7 @@ class Grid
 public:
     Grid() noexcept{}
     Grid(int height, int width) noexcept;
+    ~Grid();
     void allocate(int height, int width);
     void deallocate();
 };

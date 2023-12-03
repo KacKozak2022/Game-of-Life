@@ -5,6 +5,10 @@ Grid::Grid(int height, int width) noexcept: m_height(height), m_width(width)
     allocate(height, width);
 }
 
+Grid::~Grid(){
+    deallocate();
+}
+
 void Grid::allocate(int height, int width)
 {
     m_tab = new char* [height+2];
