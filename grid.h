@@ -2,7 +2,7 @@
 #define GRID_H
 #include <QMainWindow>
 
-class grid
+class Grid
 {
     Q_OBJECT
     int m_height = 0;
@@ -10,10 +10,10 @@ class grid
     char** m_tab = nullptr;
 
 public:
-    grid() noexcept;
+    Grid() noexcept{}
+    Grid(int height, int width) noexcept;
     void allocate(int height, int width);
     void deallocate();
-
 };
 
 #endif // GRID_H
