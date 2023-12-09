@@ -13,7 +13,7 @@ class Control: public QObject
 
 public:
     Control();
-    void Iterate();
+    void iterate();
 
 
 
