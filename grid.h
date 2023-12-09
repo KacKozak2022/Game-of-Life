@@ -2,7 +2,7 @@
 #define GRID_H
 #include <QMainWindow>
 
-class Grid
+class Grid: public QObject
 {
     Q_OBJECT
     int m_height = 0;

@@ -3,13 +3,21 @@
 #include <QMainWindow>
 #include "grid.h"
 
-class Control
+class Control: public QObject
 {
     Q_OBJECT
     Grid grid;
+    int m_iterations = 0;
+    int howManyNeighbours(int X, int Y);
+
 
 public:
     Control();
+    void Iterate();
+
+
+
+
 };
 
 #endif // CONTROL_H
