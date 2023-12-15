@@ -8,7 +8,7 @@ class Control: public QObject
     Q_OBJECT
     Grid grid;
     int m_iterations = 0;
-    int howManyNeighbours(int X, int Y);
+    short howManyNeighbours(int X, int Y);
 
 
 public:

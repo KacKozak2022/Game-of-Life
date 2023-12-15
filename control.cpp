@@ -7,7 +7,7 @@ Control::Control()
 
 
 
-int Control::howManyNeighbours(int X, int Y){
+short Control::howManyNeighbours(int X, int Y){
     int result=0;
 
 
