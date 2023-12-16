@@ -64,3 +64,44 @@ void Control::ChangeDimensions(int height, int width){
     m_width = width;
     m_height = height;
 }
+
+void Control::seed(unsigned int entered_seed)
+{
+    mt19937 gen;
+    gen.seed(entered_seed);
+
+    for(int i=1; i<m_height+1; i++)
+    {
+        for(int j=1; j<m_width+1; j++)
+        {
+            gridCurrent[i][j] = (char)(gen() % 2);
+        }
+    }
+
+    m_seed = entered_seed;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

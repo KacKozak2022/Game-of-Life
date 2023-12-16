@@ -2,6 +2,7 @@
 #define CONTROL_H
 #include <QMainWindow>
 #include <algorithm>
+#include <random>
 //#include "grid.h"
 using namespace std;
 
@@ -12,6 +13,7 @@ class Control: public QObject
     int m_height = 0;
     int m_width = 0;
     int m_iterations = 0;
+    int m_seed = 0;
 
     char** gridCurrent = nullptr;
     bool** gridNext = nullptr;
@@ -42,6 +44,7 @@ public:
     Control();
     void ChangeDimensions(int height, int width);
     void iterate();
+    void seed(unsigned int entered_seed);
 };
 
 #endif // CONTROL_H
