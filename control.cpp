@@ -2,8 +2,6 @@
 
 Control::Control(){}
 
-
-
 short Control::checkState(int row, int col){
     int neighbours = 0;
     for (int y = -1; y < 2; y++)
@@ -11,43 +9,58 @@ short Control::checkState(int row, int col){
         for (int x = -1; x < 2; x++)
         {
             if (!(x == 0 && y == 0)) {
-                if (gridCurrent.getCell(row+y, col+x)) {
+                if (gridCurrent[row+y][col+x]) {
                     neighbours++;
                 }
             }
         }
     }
     if (neighbours == 3) return true;
-    if (gridCurrent.getCell(row, col) && neighbours == 2) return true;
+    if (gridCurrent[row][col] && neighbours == 2) return true;
     return false;
 }
 
-
-
 void Control::iterate(){
-    const int WIDTH = gridCurrent.getWidth();
-    const int HEIGHT = gridCurrent.getHeight();
-    for (size_t i = 1; i < HEIGHT + 1; i++)
+    //Zakresy pętli uwzględniają faktyczną wielkość tablicy (ramkę)
+    for (size_t i = 1; i < m_height + 1; i++)
     {
-        for (size_t j = 1; j < WIDTH + 1; j++)
+        for (size_t j = 1; j < m_width + 1; j++)
         {
-            gridNext.setCell(i,j,checkState(i, j));
+            gridNext[i][j] = checkState(i, j);
         }
     }
-    for (size_t i = 1; i < HEIGHT + 1; i++)
+    for (size_t i = 1; i < m_height + 1; i++)
     {
-        for (size_t j = 1; j < WIDTH + 1; j++)
+        for (size_t j = 1; j < m_width + 1; j++)
         {
-            if (gridNext.getCell(i,j)) {
-                gridCurrent.setCell(i,j,gridCurrent.getCell(i,j)+1);
+            if (gridNext[i][j]) {
+                gridCurrent[i][j]++;
             }
             else {
-                gridCurrent.setCell(i,j,0);
+                gridCurrent[i][j] = 0;
             }
         }
     }
+    m_iterations++;
+}
 
+void Control::ChangeDimensions(int height, int width){
 
-
-
+    char** tempGridCurrent = gridCurrent;
+    bool** tempGridNext = gridNext;
+    allocGrid<char>(gridCurrent, height, width);
+    allocGrid<bool>(gridNext, height, width);
+    int minHeight = min(height, m_height);
+    int minWidth = min(width, m_width);
+    for (size_t i = 1; i < minHeight; i++)
+    {
+        for (size_t j = 1; j < minWidth; j++)
+        {
+            gridCurrent[i][j] = tempGridCurrent[i][j];
+        }
+    }
+    deallocGrid<char>(tempGridCurrent);
+    deallocGrid<bool>(tempGridNext);
+    m_width = width;
+    m_height = height;
 }
