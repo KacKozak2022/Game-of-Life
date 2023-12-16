@@ -38,11 +38,9 @@ class Control: public QObject
             tab[i] = new type [width+2];
         }
     }
-
-    void ChangeDimensions(int height, int width);
-
 public:
     Control();
+    void ChangeDimensions(int height, int width);
     void iterate();
 };
 

@@ -10,13 +10,11 @@ CONFIG += c++17
 
 SOURCES += \
     control.cpp \
-    grid.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     control.h \
-    grid.h \
     mainwindow.h
 
 FORMS += \
