@@ -6,18 +6,15 @@
 class Control: public QObject
 {
     Q_OBJECT
-    Grid grid;
+    Grid gridCurrent, gridNext;
     int m_iterations = 0;
-    short howManyNeighbours(int X, int Y);
+
+    short checkState(int row, int col);
 
 
 public:
     Control();
     void iterate();
-
-
-
-
 };
 
 #endif // CONTROL_H
