@@ -59,6 +59,7 @@ void Control::ChangeDimensions(int height, int width){
         for (size_t j = 1; j < minWidth; j++)
         {
             gridCurrent[i][j] = tempGridCurrent[i][j];
+            gridNext[i][j] = tempGridNext[i][j];
         }
     }
     deallocGrid<char>(tempGridCurrent);
@@ -83,6 +84,41 @@ void Control::seed(unsigned int entered_seed)
     m_seed = entered_seed;
 }
 
+void Control::loadFromFile()
+{
+    QString fileName = QFileDialog::getOpenFileName(nullptr,
+                        tr("Choose a file to load"),"",
+                        tr("Text file (*.txt);;All Files (*)"));
+
+    if(fileName.isEmpty())
+        return;
+    else
+    {
+        QFile file(fileName);
+        file.close();
+
+        if(file.open(QIODevice::ReadOnly))
+        {
+            deallocGrid<char>(gridCurrent);
+            deallocGrid<bool>(gridNext);
+
+            QTextStream stream(&file);
+            stream >> m_height >> m_width;
+
+            for(int i = 0; i < m_height+2; i++)
+            {
+                for(int j = 0; j < m_width+2; j++)
+                    stream >> gridCurrent[i][j];
+            }
+
+            file.close();
+        }
+        else
+            QMessageBox::information(nullptr, tr("Load Error!"),file.errorString());
+    }
+
+}
+
 void Control::saveToFile()
 {
     QString fileName = QFileDialog::getSaveFileName(nullptr,
@@ -99,12 +135,11 @@ void Control::saveToFile()
         if(file.open(QIODevice::WriteOnly))
         {
             QTextStream stream(&file);
-
             stream << m_height << " " << m_width << "\n";
 
-            for(int i = 1; i < m_height+1; i++)
+            for(int i = 0; i < m_height+2; i++)
             {
-                for(int j = 1; j < m_width+1; j++)
+                for(int j = 0; j < m_width+2; j++)
                     stream << gridCurrent[i][j] << " ";
                 stream << "\n";
             }

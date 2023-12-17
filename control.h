@@ -30,8 +30,6 @@ class Control: public QObject
               }
               delete[] tab;
               tab = nullptr;
-              m_height = 0;
-              m_width = 0;
           }
       }
 
@@ -47,6 +45,7 @@ public:
     void ChangeDimensions(int height, int width);
     void iterate();
     void seed(unsigned int entered_seed);
+    void loadFromFile();
     void saveToFile();
 };
 
