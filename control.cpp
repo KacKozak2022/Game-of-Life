@@ -21,7 +21,7 @@ short Control::checkState(int row, int col){
     return false;
 }
 
-void Control::iterate(){ //Zakresy pętli uwzględniają faktyczną wielkość tablicy (ramkę)
+void Control::iterate(){
 
     for (size_t i = 1; i < m_height + 1; i++)
     {
