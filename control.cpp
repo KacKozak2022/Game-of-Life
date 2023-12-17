@@ -156,7 +156,8 @@ void Control::saveToFile()
     }
 }
 
-void Control::simStart(int duration){
+void Control::simStart(int duration)
+{
     m_isSimRunning = 1;
     m_isSimPaused = 0;
 
@@ -181,18 +182,18 @@ void Control::simStart(int duration){
         }
     }
     if(m_isSimRunning)
-    {
-        m_simTimeRemaining = 0;
-        m_isSimRunning = 0;
-    }
+        simStop();
 }
 
-void Control::simPause(){
+void Control::simPause()
+{
     m_isSimRunning = 0;
     m_isSimPaused = 1;
 }
 
-void Control::simStop(){
+void Control::simStop()
+{
+    m_simTimeRemaining = 0;
     m_isSimRunning = 0;
 }
 
