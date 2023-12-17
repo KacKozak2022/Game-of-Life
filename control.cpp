@@ -1,4 +1,6 @@
 #include "control.h"
+#include <algorithm>
+#include <random>
 
 Control::Control(){}
 
@@ -81,9 +83,38 @@ void Control::seed(unsigned int entered_seed)
     m_seed = entered_seed;
 }
 
+void Control::saveToFile()
+{
+    QString fileName = QFileDialog::getSaveFileName(nullptr,
+                      tr("Choose save destination"),"",
+                      tr("Text file (*.txt);;All Files (*)"));
 
+    if(fileName.isEmpty())
+        return;
+    else
+    {
+        QFile file(fileName);
+        file.close();
 
+        if(file.open(QIODevice::WriteOnly))
+        {
+            QTextStream stream(&file);
 
+            stream << m_height << " " << m_width << "\n";
+
+            for(int i = 1; i < m_height+1; i++)
+            {
+                for(int j = 1; j < m_width+1; j++)
+                    stream << gridCurrent[i][j] << " ";
+                stream << "\n";
+            }
+
+            file.close();
+        }
+        else
+            QMessageBox::information(nullptr, tr("Save Error!"),file.errorString());
+    }
+}
 
 
 

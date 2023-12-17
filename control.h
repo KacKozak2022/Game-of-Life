@@ -1,15 +1,16 @@
 #ifndef CONTROL_H
 #define CONTROL_H
 #include <QMainWindow>
-#include <algorithm>
-#include <random>
-//#include "grid.h"
+#include <QFile>
+#include <QFileDialog>
+#include <QMessageBox>
+
 using namespace std;
 
 class Control: public QObject
 {
     Q_OBJECT
-    //Grid gridCurrent, gridNext;
+
     int m_height = 0;
     int m_width = 0;
     int m_iterations = 0;
@@ -20,7 +21,6 @@ class Control: public QObject
 
     short checkState(int row, int col);
 
-
     template<typename type>
     void deallocGrid(type** tab){
           if(tab != nullptr){
@@ -30,6 +30,8 @@ class Control: public QObject
               }
               delete[] tab;
               tab = nullptr;
+              m_height = 0;
+              m_width = 0;
           }
       }
 
@@ -45,6 +47,7 @@ public:
     void ChangeDimensions(int height, int width);
     void iterate();
     void seed(unsigned int entered_seed);
+    void saveToFile();
 };
 
 #endif // CONTROL_H
