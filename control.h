@@ -25,12 +25,11 @@ class Control: public QObject
     int m_simTimeRemaining = 0;
 
     char** gridCurrent = nullptr;
-    bool** gridNext = nullptr;
+    char** gridNext = nullptr;
 
     short checkState(int row, int col);
 
-    template<typename type>
-    void deallocGrid(type** tab)
+    void deallocGrid(char** tab)
     {
         if(tab != nullptr)
         {
@@ -44,14 +43,13 @@ class Control: public QObject
         }
     }
 
-    template<typename type>
-    void allocGrid(type** tab, int height, int width)
+    void allocGrid(char** tab, int height, int width)
     {
-        tab = new type* [height+2];
+        tab = new char* [height+2];
 
         for(int i = 0;i < height+2; i++)
         {
-            tab[i] = new type [width+2];
+            tab[i] = new char [width+2];
         }
     }
 
