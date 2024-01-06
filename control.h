@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QApplication>
 #include <QTime>
+#include <QTimer>
 #include <QDebug>
 #include <windows.h>
 
@@ -13,22 +14,24 @@ using namespace std;
 
 class Control: public QObject
 {
+private:
     Q_OBJECT
 
     int m_height = 0;
     int m_width = 0;
     int m_iterations = 0;
     int m_seed = 0;
-
-    bool m_isSimRunning = 0;
-    bool m_isSimPaused = 0;
-    int m_simTimeRemaining = 0;
-
     char** gridCurrent = nullptr;
     char** gridNext = nullptr;
 
-    short checkState(int row, int col);
+    QTimer *timer = nullptr;
+    //bool m_isSimRunning = 0;
+    //bool m_isSimPaused = 0;
+    //int m_simTimeRemaining = 0;
 
+
+
+    short checkState(int row, int col);
     void deallocGrid(char** tab)
     {
         if(tab != nullptr)
@@ -52,17 +55,20 @@ class Control: public QObject
             tab[i] = new char [width+2];
         }
     }
+private slots:
+    void iterate();
+    void simStart(double interval);
+    void simStop();
+
+
 
 public:
     Control();
     void ChangeDimensions(int height, int width);
-    void iterate();
     void seed(unsigned int entered_seed);
     void loadFromFile();
     void saveToFile();
-    void simStart(int duration);
-    void simPause();
-    void simStop();
+
 };
 
 #endif // CONTROL_H

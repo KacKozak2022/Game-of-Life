@@ -1,7 +1,11 @@
 #include "control.h"
 #include <random>
 
-Control::Control(){}
+Control::Control(){
+    timer = new QTimer(this);
+    connect(timer,SIGNAL(timeout()),
+            this,SLOT(iterate()));
+}
 
 short Control::checkState(int row, int col){
     int neighbours = 0;
@@ -157,11 +161,13 @@ void Control::saveToFile()
     }
 }
 
-void Control::simStart(int duration)
+void Control::simStart(double interval)
 {
-    m_isSimRunning = 1;
-    m_isSimPaused = 0;
-
+    timer->setInterval(interval*1000);
+    timer->start();
+    //m_isSimPaused = 0;
+    /*
+     m_isSimRunning = 1;
     if(m_simTimeRemaining){
         duration = m_simTimeRemaining;
     }
@@ -184,18 +190,12 @@ void Control::simStart(int duration)
     }
     if(m_isSimRunning)
         simStop();
-}
-
-void Control::simPause()
-{
-    m_isSimRunning = 0;
-    m_isSimPaused = 1;
+    */
 }
 
 void Control::simStop()
 {
-    m_simTimeRemaining = 0;
-    m_isSimRunning = 0;
+    timer->stop();
 }
 
 
