@@ -23,17 +23,17 @@ short Control::checkState(int row, int col){
 
 void Control::iterate(){
 
-    for (size_t i = 1; i < m_height + 1; i++)
+    for (int i = 1; i < m_height + 1; i++)
     {
-        for (size_t j = 1; j < m_width + 1; j++)
+        for (int j = 1; j < m_width + 1; j++)
         {
             gridNext[i][j] = checkState(i, j);
         }
     }
 
-    for (size_t i = 1; i < m_height + 1; i++)
+    for (int i = 1; i < m_height + 1; i++)
     {
-        for (size_t j = 1; j < m_width + 1; j++)
+        for (int j = 1; j < m_width + 1; j++)
         {
             if (gridNext[i][j]) {
                 gridCurrent[i][j]++;
@@ -78,12 +78,13 @@ void Control::seed(unsigned int entered_seed)
 {
     mt19937 gen;
     gen.seed(entered_seed);
+    bernoulli_distribution berDis;
 
     for(int i=1; i<m_height+1; i++)
     {
         for(int j=1; j<m_width+1; j++)
         {
-            gridCurrent[i][j] = (char)(gen() % 2);
+            gridCurrent[i][j] = berDis(gen);
         }
     }
 
