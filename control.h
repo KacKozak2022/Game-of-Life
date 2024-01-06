@@ -29,32 +29,10 @@ private:
     //bool m_isSimPaused = 0;
     //int m_simTimeRemaining = 0;
 
-
-
     short checkState(int row, int col);
-    void deallocGrid(char** tab)
-    {
-        if(tab != nullptr)
-        {
-          for(int i = 0;i < m_height+2; i++)
-          {
-              delete[] tab[i];
-              tab[i]=nullptr;
-          }
-          delete[] tab;
-          tab = nullptr;
-        }
-    }
+    void deallocGrid(char** tab);
+    void allocGrid(char** tab, int height, int width);
 
-    void allocGrid(char** tab, int height, int width)
-    {
-        tab = new char* [height+2];
-
-        for(int i = 0;i < height+2; i++)
-        {
-            tab[i] = new char [width+2];
-        }
-    }
 private slots:
     void iterate();
     void simStart(double interval);

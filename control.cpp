@@ -7,6 +7,30 @@ Control::Control(){
             this,SLOT(iterate()));
 }
 
+void Control::deallocGrid(char** tab)
+{
+    if(tab != nullptr)
+    {
+        for(int i = 0;i < m_height+2; i++)
+        {
+            delete[] tab[i];
+            tab[i]=nullptr;
+        }
+        delete[] tab;
+        tab = nullptr;
+    }
+}
+
+void Control::allocGrid(char** tab, int height, int width)
+{
+    tab = new char* [height+2];
+
+    for(int i = 0;i < height+2; i++)
+    {
+        tab[i] = new char [width+2];
+    }
+}
+
 short Control::checkState(int row, int col){
     int neighbours = 0;
     for (int y = -1; y < 2; y++)
