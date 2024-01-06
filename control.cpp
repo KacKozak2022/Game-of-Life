@@ -50,7 +50,7 @@ void Control::iterate(){
 void Control::ChangeDimensions(int height, int width){
 
     char** tempGridCurrent = gridCurrent;
-    bool** tempGridNext = gridNext;
+    char** tempGridNext = gridNext;
 
     allocGrid(gridCurrent, height, width);
     allocGrid(gridNext, height, width);
