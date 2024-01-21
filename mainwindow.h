@@ -16,6 +16,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void updateBoardSize();
+    void updateBoardContents();
 
 private slots:
     void on_iterateButton_clicked();
@@ -31,6 +32,8 @@ private slots:
     void on_startSimButton_clicked();
 
     void on_stopSimButton_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

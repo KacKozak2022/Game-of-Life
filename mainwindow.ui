@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Game of Life</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="tableWidget">
@@ -28,6 +28,12 @@
       <horstretch>0</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
     </property>
     <property name="sizeAdjustPolicy">
      <enum>QAbstractScrollArea::AdjustIgnored</enum>
@@ -59,99 +65,6 @@
     <attribute name="verticalHeaderHighlightSections">
      <bool>false</bool>
     </attribute>
-    <row>
-     <property name="text">
-      <string>ss</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>fs</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>Nowy wierszsdsd</string>
-     </property>
-    </row>
-    <column>
-     <property name="text">
-      <string>sds</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>ddd</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>fff</string>
-     </property>
-    </column>
-    <item row="0" column="0">
-     <property name="text">
-      <string>s</string>
-     </property>
-     <property name="background">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>170</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </property>
-    </item>
-    <item row="0" column="1">
-     <property name="text">
-      <string>2</string>
-     </property>
-    </item>
-    <item row="0" column="2">
-     <property name="text">
-      <string>4</string>
-     </property>
-    </item>
-    <item row="1" column="0">
-     <property name="text">
-      <string>2</string>
-     </property>
-    </item>
-    <item row="1" column="1">
-     <property name="text">
-      <string>3</string>
-     </property>
-     <property name="background">
-      <brush brushstyle="NoBrush">
-       <color alpha="255">
-        <red>0</red>
-        <green>170</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </property>
-    </item>
-    <item row="1" column="2">
-     <property name="text">
-      <string>5</string>
-     </property>
-    </item>
-    <item row="2" column="0">
-     <property name="text">
-      <string>2</string>
-     </property>
-    </item>
-    <item row="2" column="1">
-     <property name="text">
-      <string>3</string>
-     </property>
-    </item>
-    <item row="2" column="2">
-     <property name="text">
-      <string>6</string>
-     </property>
-    </item>
    </widget>
    <widget class="QLabel" name="Hlabel">
     <property name="geometry">
@@ -334,6 +247,19 @@
     </property>
     <property name="text">
      <string>Save</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>830</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Reset</string>
     </property>
    </widget>
   </widget>

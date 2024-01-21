@@ -2,13 +2,24 @@
 #include <random>
 
 Control::Control()
-    :m_height(100), m_width(100)
+    :m_height(10), m_width(10)
 {
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()), this, SLOT(iterate()));
 
-    allocGrid(&gridCurrent, 100, 100);
-    allocGrid(&gridNext, 100, 100);
+    allocGrid(&gridCurrent, 10, 10);
+    allocGrid(&gridNext, 10, 10);
+    reset();
+}
+
+void Control::reset()
+{
+    for(int i=0; i < m_height+2; i++)
+        for(int j=0; j < m_width+2; j++)
+        {
+            gridCurrent[i][j] = '0';
+            gridNext[i][j] = '0';
+        }
 }
 
 void Control::deallocGrid(char*** tab)
@@ -34,21 +45,21 @@ void Control::allocGrid(char*** tab, int height, int width)
     }
 }
 
-short Control::checkState(int row, int col){
+bool Control::checkState(int row, int col){
     int neighbours = 0;
     for (int y = -1; y < 2; y++)
     {
         for (int x = -1; x < 2; x++)
         {
             if (!(x == 0 && y == 0)) {
-                if (gridCurrent[row+y][col+x]) {
+                if (gridCurrent[row+y][col+x] != '0') {
                     neighbours++;
                 }
             }
         }
     }
     if (neighbours == 3) return true;
-    if (gridCurrent[row][col] && neighbours == 2) return true;
+    if (gridCurrent[row][col] != '0' && neighbours == 2) return true;
     return false;
 }
 
@@ -66,11 +77,13 @@ void Control::iterate(){
     {
         for (int j = 1; j < m_width + 1; j++)
         {
-            if (gridNext[i][j]) {
+            if (gridNext[i][j])
+            {
                 gridCurrent[i][j]++;
             }
-            else {
-                gridCurrent[i][j] = 0;
+            else
+            {
+                gridCurrent[i][j] = '0';
             }
         }
     }
@@ -138,15 +151,18 @@ void Control::loadFromFile()
         if(file.open(QIODevice::ReadOnly))
         {
             deallocGrid(&gridCurrent);
+            deallocGrid(&gridNext);
 
             QTextStream stream(&file);
             stream >> m_height >> m_width;
 
             allocGrid(&gridCurrent, m_height, m_width);
+            allocGrid(&gridNext, m_height, m_width);
+            reset();
 
-            for(int i = 0; i < m_height+2; i++)
+            for(int i = 1; i < m_height+1; i++)
             {
-                for(int j = 0; j < m_width+2; j++)
+                for(int j = 1; j < m_width+1; j++)
                     stream >> gridCurrent[i][j];
             }
 
@@ -175,9 +191,9 @@ void Control::saveToFile()
             QTextStream stream(&file);
             stream << m_height << " " << m_width << "\n";
 
-            for(int i = 0; i < m_height+2; i++)
+            for(int i = 1; i < m_height+1; i++)
             {
-                for(int j = 0; j < m_width+2; j++)
+                for(int j = 1; j < m_width+1; j++)
                     stream << gridCurrent[i][j] << " ";
                 stream << "\n";
             }
