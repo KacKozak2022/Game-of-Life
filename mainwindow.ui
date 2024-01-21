@@ -41,11 +41,20 @@
     <attribute name="horizontalHeaderVisible">
      <bool>false</bool>
     </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>0</number>
+    </attribute>
     <attribute name="horizontalHeaderHighlightSections">
      <bool>false</bool>
     </attribute>
     <attribute name="verticalHeaderVisible">
      <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderMinimumSectionSize">
+     <number>0</number>
+    </attribute>
+    <attribute name="verticalHeaderDefaultSectionSize">
+     <number>29</number>
     </attribute>
     <attribute name="verticalHeaderHighlightSections">
      <bool>false</bool>
