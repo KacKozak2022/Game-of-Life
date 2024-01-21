@@ -11,17 +11,16 @@ Control::Control()
     allocGrid(&gridNext, 100, 100);
 }
 
-void Control::deallocGrid(char** tab)
+void Control::deallocGrid(char*** tab)
 {
-    if(tab != nullptr)
+    if(*tab != nullptr)
     {
         for(int i = 0;i < m_height+2; i++)
         {
-            delete[] tab[i];
-            tab[i]=nullptr;
+            delete[] (*tab)[i];
         }
-        delete[] tab;
-        tab = nullptr;
+        delete[] *tab;
+        *tab = nullptr;
     }
 }
 
@@ -99,8 +98,8 @@ void Control::changeDimensions(int height, int width){
         }
     }
 
-    deallocGrid(tempGridCurrent);
-    deallocGrid(tempGridNext);
+    deallocGrid(&tempGridCurrent);
+    deallocGrid(&tempGridNext);
 
     m_width = width;
     m_height = height;
@@ -138,7 +137,7 @@ void Control::loadFromFile()
 
         if(file.open(QIODevice::ReadOnly))
         {
-            deallocGrid(gridCurrent);
+            deallocGrid(&gridCurrent);
 
             QTextStream stream(&file);
             stream >> m_height >> m_width;

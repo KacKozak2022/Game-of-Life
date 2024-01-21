@@ -14,6 +14,15 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::updateBoardSize()
+{
+    ui->tableWidget->setRowCount(Con.getHeight());
+    ui->tableWidget->setColumnCount(Con.getWidth());
+//ui->tableWidget->width()/Con.getWidth()
+    ui->tableWidget->verticalHeader()->setDefaultSectionSize(1);
+    ui->tableWidget->horizontalHeader()->setDefaultSectionSize(1);
+    ui->tableWidget->setRowHeight(1,1);
+}
 
 void MainWindow::on_iterateButton_clicked()
 {
@@ -42,6 +51,7 @@ void MainWindow::on_seedButton_clicked()
 void MainWindow::on_dimensionsButton_clicked()
 {
     Con.changeDimensions(ui->heightEdit->text().toInt(), ui->widthEdit->text().toInt());
+    updateBoardSize();
 }
 
 

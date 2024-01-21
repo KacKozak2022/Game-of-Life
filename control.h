@@ -27,7 +27,7 @@ private:
     QTimer *timer = nullptr;
 
     short checkState(int row, int col);
-    void deallocGrid(char** tab);
+    void deallocGrid(char*** tab);
     void allocGrid(char*** tab, int height, int width);
 
 public:
@@ -40,6 +40,9 @@ public:
     void simStart(double interval);
     void simStop();
 
+    int getHeight(){return m_height;}
+    int getWidth(){return m_width;}
+    //char** getGridCurrent
 };
 
 #endif // CONTROL_H
