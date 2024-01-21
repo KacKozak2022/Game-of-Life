@@ -1,10 +1,14 @@
 #include "control.h"
 #include <random>
 
-Control::Control(){
+Control::Control()
+    :m_height(100), m_width(100)
+{
     timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),
-            this,SLOT(iterate()));
+    connect(timer,SIGNAL(timeout()), this, SLOT(iterate()));
+
+    allocGrid(&gridCurrent, 100, 100);
+    allocGrid(&gridNext, 100, 100);
 }
 
 void Control::deallocGrid(char** tab)
@@ -21,13 +25,13 @@ void Control::deallocGrid(char** tab)
     }
 }
 
-void Control::allocGrid(char** tab, int height, int width)
+void Control::allocGrid(char*** tab, int height, int width)
 {
-    tab = new char* [height+2];
+    *tab = new char* [height+2];
 
     for(int i = 0;i < height+2; i++)
     {
-        tab[i] = new char [width+2];
+        (*tab)[i] = new char [width+2];
     }
 }
 
@@ -75,13 +79,13 @@ void Control::iterate(){
     m_iterations++;
 }
 
-void Control::ChangeDimensions(int height, int width){
+void Control::changeDimensions(int height, int width){
 
     char** tempGridCurrent = gridCurrent;
     char** tempGridNext = gridNext;
 
-    allocGrid(gridCurrent, height, width);
-    allocGrid(gridNext, height, width);
+    allocGrid(&gridCurrent, height, width);
+    allocGrid(&gridNext, height, width);
 
     int minHeight = min(height, m_height);
     int minWidth = min(width, m_width);
@@ -112,7 +116,8 @@ void Control::seed(unsigned int entered_seed)
     {
         for(int j=1; j<m_width+1; j++)
         {
-            gridCurrent[i][j] = berDis(gen);
+            if(berDis(gen)) gridCurrent[i][j] = '1';
+            else gridCurrent[i][j] = '0';
         }
     }
 
@@ -138,7 +143,7 @@ void Control::loadFromFile()
             QTextStream stream(&file);
             stream >> m_height >> m_width;
 
-            allocGrid(gridCurrent, m_height, m_width);
+            allocGrid(&gridCurrent, m_height, m_width);
 
             for(int i = 0; i < m_height+2; i++)
             {
@@ -189,32 +194,6 @@ void Control::simStart(double interval)
 {
     timer->setInterval(interval*1000);
     timer->start();
-    //m_isSimPaused = 0;
-    /*
-     m_isSimRunning = 1;
-    if(m_simTimeRemaining){
-        duration = m_simTimeRemaining;
-    }
-    QTime time = QTime::currentTime();
-    int timeBegin = time.second();
-
-    while(time.second() - timeBegin < duration)
-    {
-        qApp->processEvents();
-        time = QTime::currentTime();
-        iterate();
-        Sleep(250);
-
-        if(!(m_isSimRunning))
-        {
-            if(m_isSimPaused)
-                m_simTimeRemaining = duration - (time.second() - timeBegin);
-            break;
-        }
-    }
-    if(m_isSimRunning)
-        simStop();
-    */
 }
 
 void Control::simStop()

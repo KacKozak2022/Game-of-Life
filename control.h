@@ -20,32 +20,25 @@ private:
     int m_height = 0;
     int m_width = 0;
     int m_iterations = 0;
-    int m_seed = 0;
+    int m_seed = 0; //????????
     char** gridCurrent = nullptr;
     char** gridNext = nullptr;
 
     QTimer *timer = nullptr;
-    //bool m_isSimRunning = 0;
-    //bool m_isSimPaused = 0;
-    //int m_simTimeRemaining = 0;
 
     short checkState(int row, int col);
     void deallocGrid(char** tab);
-    void allocGrid(char** tab, int height, int width);
-
-private slots:
-    void iterate();
-    void simStart(double interval);
-    void simStop();
-
-
+    void allocGrid(char*** tab, int height, int width);
 
 public:
     Control();
-    void ChangeDimensions(int height, int width);
+    void changeDimensions(int height, int width);
     void seed(unsigned int entered_seed);
     void loadFromFile();
     void saveToFile();
+    void iterate();
+    void simStart(double interval);
+    void simStop();
 
 };
 

@@ -144,7 +144,7 @@
      </property>
     </item>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="Hlabel">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -157,7 +157,7 @@
      <string>Height</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="Wlabel">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -170,7 +170,7 @@
      <string>Width</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="Slabel">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -183,7 +183,7 @@
      <string>Seed</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="Intlabel">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -196,7 +196,7 @@
      <string>Simulation Interval</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="heightEdit">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -206,7 +206,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="widthEdit">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -216,7 +216,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="seedEdit">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -226,7 +226,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
+   <widget class="QLineEdit" name="simIntervalEdit">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -236,7 +236,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="dimensionsButton">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -249,7 +249,7 @@
      <string>Set dimensions</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="seedButton">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -262,7 +262,7 @@
      <string>Apply seed</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="startSimButton">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -275,7 +275,7 @@
      <string>Start/resume Sim</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="stopSimButton">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -288,7 +288,7 @@
      <string>Stop Sim</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="iterateButton">
     <property name="geometry">
      <rect>
       <x>600</x>
@@ -301,7 +301,7 @@
      <string>Iterate 1 step</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_7">
+   <widget class="QPushButton" name="loadButton">
     <property name="geometry">
      <rect>
       <x>600</x>
@@ -314,7 +314,7 @@
      <string>Load</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_8">
+   <widget class="QPushButton" name="saveButton">
     <property name="geometry">
      <rect>
       <x>700</x>
