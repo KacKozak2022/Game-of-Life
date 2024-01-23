@@ -39,11 +39,11 @@ void MainWindow::updateBoardContents()
 
             if((*Con.getGridCurrent())[i][j] == '0')
             {
-                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::black);
+                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::white);
             }
             else if((*Con.getGridCurrent())[i][j] <= '5')
             {
-                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::white);
+                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::black);
             }
             else
             {
@@ -101,9 +101,9 @@ void MainWindow::on_stopSimButton_clicked()
 }
 
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_resetButton_clicked()
 {
-    Con.reset();
+    Con.reset(Con.getHeight(), Con.getWidth());
     updateBoardContents();
 }
 

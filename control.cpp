@@ -9,13 +9,13 @@ Control::Control()
 
     allocGrid(&gridCurrent, 10, 10);
     allocGrid(&gridNext, 10, 10);
-    reset();
+    reset(10, 10);
 }
 
-void Control::reset()
+void Control::reset(int h, int w)
 {
-    for(int i=0; i < m_height+2; i++)
-        for(int j=0; j < m_width+2; j++)
+    for(int i=0; i < h+2; i++)
+        for(int j=0; j < w+2; j++)
         {
             gridCurrent[i][j] = '0';
             gridNext[i][j] = '0';
@@ -98,6 +98,7 @@ void Control::changeDimensions(int height, int width){
 
     allocGrid(&gridCurrent, height, width);
     allocGrid(&gridNext, height, width);
+    reset(height, width);
 
     int minHeight = min(height, m_height);
     int minWidth = min(width, m_width);
@@ -154,11 +155,13 @@ void Control::loadFromFile()
             deallocGrid(&gridNext);
 
             QTextStream stream(&file);
+            stream.skipWhiteSpace();
+
             stream >> m_height >> m_width;
 
             allocGrid(&gridCurrent, m_height, m_width);
             allocGrid(&gridNext, m_height, m_width);
-            reset();
+            reset(m_height, m_width);
 
             for(int i = 1; i < m_height+1; i++)
             {

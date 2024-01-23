@@ -39,7 +39,7 @@ public:
     void iterate();
     void simStart(double interval);
     void simStop();
-    void reset();
+    void reset(int h, int w);
 
     int getHeight(){return m_height;}
     int getWidth(){return m_width;}
