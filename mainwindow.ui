@@ -236,7 +236,7 @@
             </layout>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="resetButton">
              <property name="text">
               <string>Reset</string>
              </property>
@@ -270,7 +270,7 @@
      <x>0</x>
      <y>0</y>
      <width>786</width>
-     <height>29</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
