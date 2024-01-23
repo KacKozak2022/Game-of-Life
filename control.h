@@ -42,6 +42,7 @@ public:
     void simStart(double interval);
     void simStop();
     void reset(int h, int w);
+    void changeState(int row, int column);
 
     int getHeight(){return m_height;}
     int getWidth(){return m_width;}

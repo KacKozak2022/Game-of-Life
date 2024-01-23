@@ -216,7 +216,20 @@ void Control::simStop()
     m_timer->stop();
 }
 
-
+void Control::changeState(int row, int column)
+{
+    switch(gridCurrent[row][column])
+    {
+    case '0':
+        gridCurrent[row][column] = '1';
+        break;
+    case '5':
+        gridCurrent[row][column] = '0';
+        break;
+    default:
+        gridCurrent[row][column] = '5';
+    }
+}
 
 
 

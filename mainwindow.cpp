@@ -42,7 +42,7 @@ void MainWindow::updateBoardContents()
             {
                 ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::black);
             }
-            else if((*Con.getGridCurrent())[i][j] <= '5')
+            else if((*Con.getGridCurrent())[i][j] < '5')
             {
                 ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::white);
             }
@@ -105,6 +105,13 @@ void MainWindow::on_stopSimButton_clicked()
 void MainWindow::on_resetButton_clicked()
 {
     Con.reset(Con.getHeight(), Con.getWidth());
+    updateBoardContents();
+}
+
+
+void MainWindow::on_tableWidget_cellClicked(int row, int column)
+{
+    Con.changeState(row + 1, column + 1);
     updateBoardContents();
 }
 
