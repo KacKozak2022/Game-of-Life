@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(Con.getTimer(),SIGNAL(timeout()), this, SLOT(updateBoardContents()));
     //this->setFixedSize(QSize(800, 900));
     //ui->horizontalLayout_2->SetMaximumSize(QLayout::sizeConstraint());
     updateBoardSize();
@@ -39,15 +40,15 @@ void MainWindow::updateBoardContents()
 
             if((*Con.getGridCurrent())[i][j] == '0')
             {
-                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::white);
+                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::black);
             }
             else if((*Con.getGridCurrent())[i][j] <= '5')
             {
-                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::black);
+                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::white);
             }
             else
             {
-                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::darkYellow);
+                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::darkBlue);
             }
         }
     }

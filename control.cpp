@@ -4,8 +4,8 @@
 Control::Control()
     :m_height(10), m_width(10)
 {
-    timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()), this, SLOT(iterate()));
+    m_timer = new QTimer(this);
+    connect(m_timer,SIGNAL(timeout()), this, SLOT(iterate()));
 
     allocGrid(&gridCurrent, 10, 10);
     allocGrid(&gridNext, 10, 10);
@@ -79,7 +79,7 @@ void Control::iterate(){
         {
             if (gridNext[i][j])
             {
-                gridCurrent[i][j]++;
+                if(gridCurrent[i][j] <= '5') gridCurrent[i][j]++;
             }
             else
             {
@@ -207,13 +207,13 @@ void Control::saveToFile()
 
 void Control::simStart(double interval)
 {
-    timer->setInterval(interval*1000);
-    timer->start();
+    m_timer->setInterval(interval*1000);
+    m_timer->start();
 }
 
 void Control::simStop()
 {
-    timer->stop();
+    m_timer->stop();
 }
 
 

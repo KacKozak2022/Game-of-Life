@@ -8,7 +8,6 @@
 #include <QTime>
 #include <QTimer>
 #include <QDebug>
-#include <windows.h>
 
 using namespace std;
 
@@ -24,11 +23,14 @@ private:
     char** gridCurrent = nullptr;
     char** gridNext = nullptr;
 
-    QTimer *timer = nullptr;
+    QTimer *m_timer = nullptr;
 
     bool checkState(int row, int col);
     void deallocGrid(char*** tab);
     void allocGrid(char*** tab, int height, int width);
+
+public slots:
+    void iterate();
 
 public:
     Control();
@@ -36,7 +38,7 @@ public:
     void seed(unsigned int entered_seed);
     void loadFromFile();
     void saveToFile();
-    void iterate();
+
     void simStart(double interval);
     void simStop();
     void reset(int h, int w);
@@ -44,6 +46,7 @@ public:
     int getHeight(){return m_height;}
     int getWidth(){return m_width;}
     char*** getGridCurrent(){return &gridCurrent;}
+    QTimer* getTimer(){return m_timer;}
 };
 
 #endif // CONTROL_H

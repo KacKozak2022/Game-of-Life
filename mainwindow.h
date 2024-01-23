@@ -16,6 +16,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void updateBoardSize();
+
+public slots:
     void updateBoardContents();
 
 private slots:
