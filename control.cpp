@@ -103,9 +103,9 @@ void Control::changeDimensions(int height, int width){
     int minHeight = min(height, m_height);
     int minWidth = min(width, m_width);
 
-    for (size_t i = 1; i < minHeight; i++)
+    for (size_t i = 1; i < minHeight + 1; i++)
     {
-        for (size_t j = 1; j < minWidth; j++)
+        for (size_t j = 1; j < minWidth + 1; j++)
         {
             gridCurrent[i][j] = tempGridCurrent[i][j];
             gridNext[i][j] = tempGridNext[i][j];
@@ -151,22 +151,19 @@ void Control::loadFromFile()
 
         if(file.open(QIODevice::ReadOnly))
         {
-            deallocGrid(&gridCurrent);
-            deallocGrid(&gridNext);
-
             QTextStream stream(&file);
-            stream.skipWhiteSpace();
 
-            stream >> m_height >> m_width;
+            int h = stream.readLine().toInt();
+            int w = stream.readLine().toInt();
 
-            allocGrid(&gridCurrent, m_height, m_width);
-            allocGrid(&gridNext, m_height, m_width);
+            changeDimensions(h, w);
             reset(m_height, m_width);
 
             for(int i = 1; i < m_height+1; i++)
             {
+                QString line = stream.readLine();
                 for(int j = 1; j < m_width+1; j++)
-                    stream >> gridCurrent[i][j];
+                gridCurrent[i][j] = line.at(j-1).toLatin1();
             }
 
             file.close();
@@ -192,12 +189,12 @@ void Control::saveToFile()
         if(file.open(QIODevice::WriteOnly))
         {
             QTextStream stream(&file);
-            stream << m_height << " " << m_width << "\n";
+            stream << m_height << "\n" << m_width << "\n";
 
             for(int i = 1; i < m_height+1; i++)
             {
                 for(int j = 1; j < m_width+1; j++)
-                    stream << gridCurrent[i][j] << " ";
+                    stream << gridCurrent[i][j];
                 stream << "\n";
             }
 
