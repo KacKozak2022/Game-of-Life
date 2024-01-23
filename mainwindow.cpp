@@ -6,7 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setFixedSize(QSize(800, 900));
+    //this->setFixedSize(QSize(800, 900));
+    //ui->horizontalLayout_2->SetMaximumSize(QLayout::sizeConstraint());
     updateBoardSize();
     updateBoardContents();
 }
