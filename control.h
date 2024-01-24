@@ -18,8 +18,8 @@ private:
 
     int m_height = 0;
     int m_width = 0;
-    int m_iterations = 0;
-    int m_seed = 0; //????????
+    unsigned int m_seed = 0;
+
     char** gridCurrent = nullptr;
     char** gridNext = nullptr;
 

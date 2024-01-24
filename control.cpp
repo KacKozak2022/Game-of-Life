@@ -81,7 +81,7 @@ void Control::iterate(){
         {
             if (gridNext[i][j])
             {
-                if(gridCurrent[i][j] <= '5') gridCurrent[i][j]++;
+                if(gridCurrent[i][j] < '5') gridCurrent[i][j]++;
             }
             else
             {
@@ -89,8 +89,6 @@ void Control::iterate(){
             }
         }
     }
-
-    m_iterations++;
 }
 
 void Control::changeDimensions(int height, int width){
@@ -222,17 +220,10 @@ void Control::simStop()
 
 void Control::changeState(int row, int column)
 {
-    switch(gridCurrent[row][column])
-    {
-    case '0':
+    if(gridCurrent[row][column] == '0')
         gridCurrent[row][column] = '1';
-        break;
-    case '5':
+    else
         gridCurrent[row][column] = '0';
-        break;
-    default:
-        gridCurrent[row][column] = '5';
-    }
 }
 
 
