@@ -1,15 +1,17 @@
 #include "control.h"
 #include <random>
 
+constexpr int START_SIZE = 50;
+
 Control::Control()
-    :m_height(10), m_width(10)
+    :m_height(START_SIZE), m_width(START_SIZE)
 {
     m_timer = new QTimer(this);
     connect(m_timer,SIGNAL(timeout()), this, SLOT(iterate()));
 
-    allocGrid(&gridCurrent, 10, 10);
-    allocGrid(&gridNext, 10, 10);
-    reset(10, 10);
+    allocGrid(&gridCurrent, START_SIZE, START_SIZE);
+    allocGrid(&gridNext, START_SIZE, START_SIZE);
+    reset(START_SIZE, START_SIZE);
 }
 
 void Control::reset(int h, int w)
@@ -155,9 +157,11 @@ void Control::loadFromFile()
 
             int h = stream.readLine().toInt();
             int w = stream.readLine().toInt();
+            unsigned int s = stream.readLine().toInt();
 
             changeDimensions(h, w);
             reset(m_height, m_width);
+            m_seed = s;
 
             for(int i = 1; i < m_height+1; i++)
             {
@@ -189,7 +193,7 @@ void Control::saveToFile()
         if(file.open(QIODevice::WriteOnly))
         {
             QTextStream stream(&file);
-            stream << m_height << "\n" << m_width << "\n";
+            stream << m_height << "\n" << m_width << "\n" << m_seed << "\n";
 
             for(int i = 1; i < m_height+1; i++)
             {

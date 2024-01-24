@@ -46,6 +46,7 @@ public:
 
     int getHeight(){return m_height;}
     int getWidth(){return m_width;}
+    unsigned int getSeed(){return m_seed;}
     char*** getGridCurrent(){return &gridCurrent;}
     QTimer* getTimer(){return m_timer;}
 };

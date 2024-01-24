@@ -11,11 +11,18 @@ MainWindow::MainWindow(QWidget *parent)
     //ui->horizontalLayout_2->SetMaximumSize(QLayout::sizeConstraint());
     updateBoardSize();
     updateBoardContents();
+    updateStatusBar();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::updateStatusBar()
+{
+    QString message = QString("%1 x %2, seed = %3").arg(Con.getHeight()).arg(Con.getWidth()).arg(Con.getSeed());
+    ui->statusbar->showMessage(message);
 }
 
 void MainWindow::updateBoardSize()
@@ -44,11 +51,11 @@ void MainWindow::updateBoardContents()
             }
             else if((*Con.getGridCurrent())[i][j] < '5')
             {
-                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::white);
+                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::gray);
             }
             else
             {
-                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::darkBlue);
+                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::darkCyan);
             }
         }
     }
@@ -66,6 +73,7 @@ void MainWindow::on_loadButton_clicked()
     Con.loadFromFile();
     updateBoardSize();
     updateBoardContents();
+    updateStatusBar();
 }
 
 
@@ -79,6 +87,7 @@ void MainWindow::on_seedButton_clicked()
 {
     Con.seed(ui->seedEdit->text().toInt());
     updateBoardContents();
+    updateStatusBar();
 }
 
 
@@ -87,6 +96,7 @@ void MainWindow::on_dimensionsButton_clicked()
     Con.changeDimensions(ui->heightEdit->text().toInt(), ui->widthEdit->text().toInt());
     updateBoardSize();
     updateBoardContents();
+    updateStatusBar();
 }
 
 
