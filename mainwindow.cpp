@@ -37,13 +37,13 @@ void MainWindow::updateBoardSize()
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
-void MainWindow::updateBoardContents()
+void MainWindow::updateBoardContents() //dodac nowa funkcje do zmiany pojedynczej komorki przez klikniecie zamiast wywolywac ta
 {
     for(int i=1; i < Con.getHeight() + 1; i++)
     {
         for(int j=1; j < Con.getWidth() + 1; j++)
         {
-            ui->tableWidget->setItem(i - 1, j - 1, new QTableWidgetItem);
+            ui->tableWidget->setItem(i - 1, j - 1, new QTableWidgetItem); //wrzucic do updateBoardSize() dla optymalizacji
 
             if((*Con.getGridCurrent())[i][j] == '0')
             {
@@ -122,6 +122,6 @@ void MainWindow::on_resetButton_clicked()
 void MainWindow::on_tableWidget_cellClicked(int row, int column)
 {
     Con.changeState(row + 1, column + 1);
-    updateBoardContents();
+    updateBoardContents(); //dodac nowa funkcje do zmiany pojedynczej komorki przez klikniecie zamiast wywolywac ta
 }
 
