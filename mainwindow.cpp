@@ -19,6 +19,22 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::updateSingleCell(int row, int column)
+{
+    if((*Con.getGridCurrent())[row + 1][column + 1] == '0')
+    {
+        ui->tableWidget->item(row, column)->setBackground(Qt::black);
+    }
+    else if((*Con.getGridCurrent())[row + 1][column + 1] < '5')
+    {
+        ui->tableWidget->item(row, column)->setBackground(Qt::gray);
+    }
+    else
+    {
+        ui->tableWidget->item(row, column)->setBackground(Qt::darkCyan);
+    }
+}
+
 void MainWindow::updateStatusBar()
 {
     QString message = QString("%1 x %2, seed = %3").arg(Con.getHeight()).arg(Con.getWidth()).arg(Con.getSeed());
@@ -35,16 +51,22 @@ void MainWindow::updateBoardSize()
 
     ui->tableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    for(int i=1; i < Con.getHeight() + 1; i++)
+    {
+        for(int j=1; j < Con.getWidth() + 1; j++)
+        {
+            ui->tableWidget->setItem(i - 1, j - 1, new QTableWidgetItem);
+        }
+    }
 }
 
-void MainWindow::updateBoardContents() //dodac nowa funkcje do zmiany pojedynczej komorki przez klikniecie zamiast wywolywac ta
+void MainWindow::updateBoardContents()
 {
     for(int i=1; i < Con.getHeight() + 1; i++)
     {
         for(int j=1; j < Con.getWidth() + 1; j++)
         {
-            ui->tableWidget->setItem(i - 1, j - 1, new QTableWidgetItem); //wrzucic do updateBoardSize() dla optymalizacji
-
             if((*Con.getGridCurrent())[i][j] == '0')
             {
                 ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::black);
@@ -122,6 +144,6 @@ void MainWindow::on_resetButton_clicked()
 void MainWindow::on_tableWidget_cellClicked(int row, int column)
 {
     Con.changeState(row + 1, column + 1);
-    updateBoardContents(); //dodac nowa funkcje do zmiany pojedynczej komorki przez klikniecie zamiast wywolywac ta
+    updateSingleCell(row, column);
 }
 

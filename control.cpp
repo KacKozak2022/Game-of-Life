@@ -123,7 +123,7 @@ void Control::seed(unsigned int entered_seed)
 {
     mt19937 gen;
     gen.seed(entered_seed);
-    bernoulli_distribution berDis(0.3);
+    bernoulli_distribution berDis(0.1);
 
     for(int i=1; i<m_height+1; i++)
     {

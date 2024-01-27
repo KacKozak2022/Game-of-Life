@@ -17,6 +17,7 @@ public:
     ~MainWindow();
     void updateBoardSize();
     void updateStatusBar();
+    void updateSingleCell(int row, int column);
 
 public slots:
     void updateBoardContents();
