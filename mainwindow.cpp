@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(Con.getTimer(),SIGNAL(timeout()), this, SLOT(updateBoardContents()));
     //this->setFixedSize(QSize(800, 900));
     //ui->horizontalLayout_2->SetMaximumSize(QLayout::sizeConstraint());
-    qInfo()<<"konstruktor Mainwindow";
+    //qInfo()<<"konstruktor Mainwindow";
     updateBoardSize();
     updateBoardContents();
     updateStatusBar();
@@ -29,7 +29,7 @@ QBrush c_red(QColor::fromRgb(255,25,140));
 
 void MainWindow::updateSingleCell(int row, int column)
 {
-    int state = static_cast<int>((*Con.getGridCurrent())[row][column]);
+    int state = static_cast<int>((*Con.getGridCurrent())[row+1][column+1]);
     switch(state){
     case '0':
         ui->tableWidget->item(row, column)->setBackground(Qt::black); break;
@@ -92,7 +92,7 @@ void MainWindow::updateBoardContents()
     {
         for(int j=0; j < Con.getWidth(); j++)
         {
-            qInfo()<< "cell:" << i<<","<<j;
+            //qInfo()<< "cell:" << i<<","<<j;
             updateSingleCell(i,j);
         }
     }
@@ -104,7 +104,6 @@ void MainWindow::on_iterateButton_clicked()
     updateBoardContents();
 }
 
-
 void MainWindow::on_loadButton_clicked()
 {
     Con.loadFromFile();
@@ -113,12 +112,10 @@ void MainWindow::on_loadButton_clicked()
     updateStatusBar();
 }
 
-
 void MainWindow::on_saveButton_clicked()
 {
     Con.saveToFile();
 }
-
 
 void MainWindow::on_seedButton_clicked()
 {
@@ -126,7 +123,6 @@ void MainWindow::on_seedButton_clicked()
     updateBoardContents();
     updateStatusBar();
 }
-
 
 void MainWindow::on_dimensionsButton_clicked()
 {
@@ -136,10 +132,9 @@ void MainWindow::on_dimensionsButton_clicked()
     updateStatusBar();
 }
 
-
 void MainWindow::on_startSimButton_clicked()
 {
-    Con.simStart(ui->simIntervalEdit->text().toInt());
+    Con.simStart(ui->simIntervalEdit->text().toDouble());
 }
 
 

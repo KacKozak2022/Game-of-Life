@@ -212,6 +212,7 @@ void Control::saveToFile()
 void Control::simStart(double interval)
 {
     m_timer->setInterval(interval*1000);
+    qInfo()<<interval;
     m_timer->start();
 }
 
