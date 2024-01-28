@@ -12,6 +12,7 @@ Control::Control()
     allocGrid(&gridCurrent, START_SIZE, START_SIZE);
     allocGrid(&gridNext, START_SIZE, START_SIZE);
     reset(START_SIZE, START_SIZE);
+    qInfo()<<"konstruktor control";
 }
 
 void Control::reset(int h, int w)
@@ -21,6 +22,7 @@ void Control::reset(int h, int w)
         {
             gridCurrent[i][j] = '0';
             gridNext[i][j] = '0';
+
         }
 }
 

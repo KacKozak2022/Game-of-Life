@@ -9,9 +9,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(Con.getTimer(),SIGNAL(timeout()), this, SLOT(updateBoardContents()));
     //this->setFixedSize(QSize(800, 900));
     //ui->horizontalLayout_2->SetMaximumSize(QLayout::sizeConstraint());
+    qInfo()<<"konstruktor Mainwindow";
     updateBoardSize();
     updateBoardContents();
     updateStatusBar();
+
 }
 
 MainWindow::~MainWindow()
@@ -19,8 +21,30 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+QBrush c_blue(QColor::fromRgb(64,25,255));
+QBrush c_blurple(QColor::fromRgb(140,25,255));
+QBrush c_purple(QColor::fromRgb(217,25,255));
+QBrush c_pink(QColor::fromRgb(225,25,217));
+QBrush c_red(QColor::fromRgb(255,25,140));
+
 void MainWindow::updateSingleCell(int row, int column)
 {
+    int state = static_cast<int>((*Con.getGridCurrent())[row][column]);
+    switch(state){
+    case '0':
+        ui->tableWidget->item(row, column)->setBackground(Qt::black); break;
+    case '1':
+        ui->tableWidget->item(row, column)->setBackground(c_blue); break;
+    case '2':
+        ui->tableWidget->item(row, column)->setBackground(c_blurple); break;
+    case '3':
+        ui->tableWidget->item(row, column)->setBackground(c_purple); break;
+    case '4':
+        ui->tableWidget->item(row, column)->setBackground(c_pink); break;
+    case '5':
+        ui->tableWidget->item(row, column)->setBackground(c_red); break;
+    }
+/*
     if((*Con.getGridCurrent())[row + 1][column + 1] == '0')
     {
         ui->tableWidget->item(row, column)->setBackground(Qt::black);
@@ -31,8 +55,9 @@ void MainWindow::updateSingleCell(int row, int column)
     }
     else
     {
-        ui->tableWidget->item(row, column)->setBackground(Qt::darkCyan);
+        ui->tableWidget->item(row, column)->setBackground(c_blue);
     }
+*/
 }
 
 void MainWindow::updateStatusBar()
@@ -52,33 +77,23 @@ void MainWindow::updateBoardSize()
     ui->tableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    for(int i=1; i < Con.getHeight() + 1; i++)
+    for(int i=0; i < Con.getHeight(); i++)
     {
-        for(int j=1; j < Con.getWidth() + 1; j++)
+        for(int j=0; j < Con.getWidth(); j++)
         {
-            ui->tableWidget->setItem(i - 1, j - 1, new QTableWidgetItem);
+            ui->tableWidget->setItem(i, j, new QTableWidgetItem);
         }
     }
 }
 
 void MainWindow::updateBoardContents()
 {
-    for(int i=1; i < Con.getHeight() + 1; i++)
+    for(int i=0; i < Con.getHeight(); i++)
     {
-        for(int j=1; j < Con.getWidth() + 1; j++)
+        for(int j=0; j < Con.getWidth(); j++)
         {
-            if((*Con.getGridCurrent())[i][j] == '0')
-            {
-                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::black);
-            }
-            else if((*Con.getGridCurrent())[i][j] < '5')
-            {
-                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::gray);
-            }
-            else
-            {
-                ui->tableWidget->item(i - 1, j - 1)->setBackground(Qt::darkCyan);
-            }
+            qInfo()<< "cell:" << i<<","<<j;
+            updateSingleCell(i,j);
         }
     }
 }
