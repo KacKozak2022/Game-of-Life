@@ -7,13 +7,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(Con.getTimer(),SIGNAL(timeout()), this, SLOT(updateBoardContents()));
-    //this->setFixedSize(QSize(800, 900));
-    //ui->horizontalLayout_2->SetMaximumSize(QLayout::sizeConstraint());
-    //qInfo()<<"konstruktor Mainwindow";
     updateBoardSize();
     updateBoardContents();
     updateStatusBar();
-
 }
 
 MainWindow::~MainWindow()
@@ -92,7 +88,6 @@ void MainWindow::updateBoardContents()
     {
         for(int j=0; j < Con.getWidth(); j++)
         {
-            //qInfo()<< "cell:" << i<<","<<j;
             updateSingleCell(i,j);
         }
     }

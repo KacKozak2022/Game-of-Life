@@ -12,18 +12,18 @@ Control::Control()
     allocGrid(&gridCurrent, START_SIZE, START_SIZE);
     allocGrid(&gridNext, START_SIZE, START_SIZE);
     reset(START_SIZE, START_SIZE);
-    qInfo()<<"konstruktor control";
 }
 
 void Control::reset(int h, int w)
 {
     for(int i=0; i < h+2; i++)
+    {
         for(int j=0; j < w+2; j++)
         {
             gridCurrent[i][j] = '0';
             gridNext[i][j] = '0';
-
         }
+    }
 }
 
 void Control::deallocGrid(char*** tab)
@@ -86,9 +86,7 @@ void Control::iterate(){
                 if(gridCurrent[i][j] < '5') gridCurrent[i][j]++;
             }
             else
-            {
                 gridCurrent[i][j] = '0';
-            }
         }
     }
 }
@@ -212,7 +210,6 @@ void Control::saveToFile()
 void Control::simStart(double interval)
 {
     m_timer->setInterval(interval*1000);
-    qInfo()<<interval;
     m_timer->start();
 }
 
