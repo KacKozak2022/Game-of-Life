@@ -40,20 +40,6 @@ void MainWindow::updateSingleCell(int row, int column)
     case '5':
         ui->tableWidget->item(row, column)->setBackground(c_red); break;
     }
-/*
-    if((*Con.getGridCurrent())[row + 1][column + 1] == '0')
-    {
-        ui->tableWidget->item(row, column)->setBackground(Qt::black);
-    }
-    else if((*Con.getGridCurrent())[row + 1][column + 1] < '5')
-    {
-        ui->tableWidget->item(row, column)->setBackground(Qt::gray);
-    }
-    else
-    {
-        ui->tableWidget->item(row, column)->setBackground(c_blue);
-    }
-*/
 }
 
 void MainWindow::updateStatusBar()

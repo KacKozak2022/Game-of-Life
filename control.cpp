@@ -1,5 +1,5 @@
 #include "control.h"
-#include <random>
+
 
 constexpr int START_SIZE = 50;
 
@@ -8,7 +8,7 @@ Control::Control()
 {
     m_timer = new QTimer(this);
     connect(m_timer,SIGNAL(timeout()), this, SLOT(iterate()));
-
+    genRandom.seed(randDevice());
     allocGrid(&gridCurrent, START_SIZE, START_SIZE);
     allocGrid(&gridNext, START_SIZE, START_SIZE);
     reset(START_SIZE, START_SIZE);
@@ -26,6 +26,16 @@ void Control::reset(int h, int w)
     }
 }
 
+void Control::allocGrid(char*** tab, int height, int width)
+{
+    *tab = new char* [height+2];
+
+    for(int i = 0;i < height+2; i++)
+    {
+        (*tab)[i] = new char [width+2];
+    }
+}
+
 void Control::deallocGrid(char*** tab)
 {
     if(*tab != nullptr)
@@ -36,16 +46,6 @@ void Control::deallocGrid(char*** tab)
         }
         delete[] *tab;
         *tab = nullptr;
-    }
-}
-
-void Control::allocGrid(char*** tab, int height, int width)
-{
-    *tab = new char* [height+2];
-
-    for(int i = 0;i < height+2; i++)
-    {
-        (*tab)[i] = new char [width+2];
     }
 }
 
@@ -121,20 +121,25 @@ void Control::changeDimensions(int height, int width){
 
 void Control::seed(unsigned int entered_seed)
 {
-    mt19937 gen;
-    gen.seed(entered_seed);
-    bernoulli_distribution berDis(0.1);
+    if(entered_seed){
+        genUser.seed(entered_seed);
+        m_seed = entered_seed;
+    }else{
+        int randomSeed = genRandom();
+        genUser.seed(randomSeed);
+        m_seed = randomSeed;
+    }
 
+    bernoulli_distribution berDis(0.1);
     for(int i=1; i<m_height+1; i++)
     {
         for(int j=1; j<m_width+1; j++)
         {
-            if(berDis(gen)) gridCurrent[i][j] = '1';
+            if(berDis(genUser))
+                gridCurrent[i][j] = '1';
             else gridCurrent[i][j] = '0';
         }
     }
-
-    m_seed = entered_seed;
 }
 
 void Control::loadFromFile()

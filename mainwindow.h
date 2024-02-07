@@ -18,8 +18,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void updateBoardSize();
-    void updateStatusBar();
     void updateSingleCell(int row, int column);
+    void updateStatusBar();
 
 public slots:
     void updateBoardContents();
