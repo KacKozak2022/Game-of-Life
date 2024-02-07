@@ -29,7 +29,6 @@ void Control::reset(int h, int w)
 void Control::allocGrid(char*** tab, int height, int width)
 {
     *tab = new char* [height+2];
-
     for(int i = 0;i < height+2; i++)
     {
         (*tab)[i] = new char [width+2];
@@ -93,6 +92,11 @@ void Control::iterate(){
 
 void Control::changeDimensions(int height, int width){
 
+    if(width*height > 10000)
+        QMessageBox::information(nullptr, "Caution", "Setting a large board size may slow down the program on slower devices");
+
+    if(width*height){
+
     char** tempGridCurrent = gridCurrent;
     char** tempGridNext = gridNext;
 
@@ -111,12 +115,14 @@ void Control::changeDimensions(int height, int width){
             gridNext[i][j] = tempGridNext[i][j];
         }
     }
-
     deallocGrid(&tempGridCurrent);
     deallocGrid(&tempGridNext);
 
     m_width = width;
     m_height = height;
+    }else{
+    QMessageBox::warning(nullptr, "Warning", "Invalid board size");
+    }
 }
 
 void Control::seed(unsigned int entered_seed)
@@ -176,9 +182,8 @@ void Control::loadFromFile()
             file.close();
         }
         else
-            QMessageBox::information(nullptr, tr("Load Error!"),file.errorString());
+            QMessageBox::warning(nullptr, tr("Load Error!"),file.errorString());
     }
-
 }
 
 void Control::saveToFile()
@@ -204,18 +209,21 @@ void Control::saveToFile()
                     stream << gridCurrent[i][j];
                 stream << "\n";
             }
-
             file.close();
         }
         else
-            QMessageBox::information(nullptr, tr("Save Error!"),file.errorString());
+            QMessageBox::warning(nullptr, tr("Save Error!"),file.errorString());
     }
 }
 
 void Control::simStart(double interval)
 {
-    m_timer->setInterval(interval*1000);
-    m_timer->start();
+    if(interval){
+        m_timer->setInterval(interval*1000);
+        m_timer->start();
+    }else{
+        QMessageBox::warning(nullptr, "Warning", "Invalid simulation interval");
+    }
 }
 
 void Control::simStop()
