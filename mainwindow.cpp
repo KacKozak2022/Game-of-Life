@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(Con.getTimer(),SIGNAL(timeout()), this, SLOT(updateBoardContents()));
+    Con.loadFromFile(":/startConfig.txt");
     updateBoardSize();
     updateBoardContents();
     updateStatusBar();

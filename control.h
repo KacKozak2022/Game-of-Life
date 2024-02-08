@@ -39,7 +39,7 @@ public:
     ~Control();
     void changeDimensions(int height, int width);
     void seed(unsigned int entered_seed);
-    void loadFromFile();
+    void loadFromFile(QString path = "");
     void saveToFile();
     void simStart(double interval);
     void simStop();

@@ -189,6 +189,9 @@
                <property name="buttonSymbols">
                 <enum>QAbstractSpinBox::NoButtons</enum>
                </property>
+               <property name="minimum">
+                <number>1</number>
+               </property>
                <property name="maximum">
                 <number>1000</number>
                </property>
@@ -207,6 +210,9 @@
                </property>
                <property name="buttonSymbols">
                 <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+               <property name="minimum">
+                <number>1</number>
                </property>
                <property name="maximum">
                 <number>1000</number>
@@ -260,8 +266,14 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="toolTipDuration">
+              <number>-1</number>
+             </property>
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="inputMethodHints">
+              <set>Qt::ImhNone</set>
              </property>
              <property name="text">
               <string>Seed</string>
@@ -284,6 +296,12 @@
                <width>200</width>
                <height>0</height>
               </size>
+             </property>
+             <property name="toolTip">
+              <string>Setting seed to 0 will generate a random board every time</string>
+             </property>
+             <property name="toolTipDuration">
+              <number>-1</number>
              </property>
              <property name="styleSheet">
               <string notr="true">background-color: rgb(145, 145, 145);</string>

@@ -1,16 +1,10 @@
 #include "control.h"
 
-constexpr int START_SIZE = 50;
-
 Control::Control()
-    :m_height(START_SIZE), m_width(START_SIZE)
 {
     m_timer = new QTimer(this);
     connect(m_timer,SIGNAL(timeout()), this, SLOT(iterate()));
     genRandom.seed(randDevice());
-    allocGrid(&gridCurrent, START_SIZE, START_SIZE);
-    allocGrid(&gridNext, START_SIZE, START_SIZE);
-    reset(START_SIZE, START_SIZE);
 }
 
 Control::~Control()
@@ -148,9 +142,11 @@ void Control::seed(unsigned int entered_seed)
     }
 }
 
-void Control::loadFromFile()
+void Control::loadFromFile(QString path)
 {
-    QString fileName = QFileDialog::getOpenFileName(nullptr,
+    QString fileName;
+    if(path != "") fileName = path;
+    else fileName = QFileDialog::getOpenFileName(nullptr,
                         tr("Choose a file to load"),"",
                         tr("Text file (*.txt);;All Files (*)"));
 
