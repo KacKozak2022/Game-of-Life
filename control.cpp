@@ -1,6 +1,5 @@
 #include "control.h"
 
-
 constexpr int START_SIZE = 50;
 
 Control::Control()
@@ -12,6 +11,12 @@ Control::Control()
     allocGrid(&gridCurrent, START_SIZE, START_SIZE);
     allocGrid(&gridNext, START_SIZE, START_SIZE);
     reset(START_SIZE, START_SIZE);
+}
+
+Control::~Control()
+{
+    deallocGrid(&gridCurrent);
+    deallocGrid(&gridNext);
 }
 
 void Control::reset(int h, int w)
@@ -92,10 +97,8 @@ void Control::iterate(){
 
 void Control::changeDimensions(int height, int width){
 
-    if(width*height > 10000)
+    if(width*height > 250000)
         QMessageBox::information(nullptr, "Caution", "Setting a large board size may slow down the program on slower devices");
-
-    if(width*height){
 
     char** tempGridCurrent = gridCurrent;
     char** tempGridNext = gridNext;
@@ -120,9 +123,6 @@ void Control::changeDimensions(int height, int width){
 
     m_width = width;
     m_height = height;
-    }else{
-    QMessageBox::warning(nullptr, "Warning", "Invalid board size");
-    }
 }
 
 void Control::seed(unsigned int entered_seed)
@@ -218,12 +218,8 @@ void Control::saveToFile()
 
 void Control::simStart(double interval)
 {
-    if(interval){
-        m_timer->setInterval(interval*1000);
-        m_timer->start();
-    }else{
-        QMessageBox::warning(nullptr, "Warning", "Invalid simulation interval");
-    }
+    m_timer->setInterval(interval*1000);
+    m_timer->start();
 }
 
 void Control::simStop()

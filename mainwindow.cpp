@@ -100,14 +100,14 @@ void MainWindow::on_saveButton_clicked()
 
 void MainWindow::on_seedButton_clicked()
 {
-    Con.seed(ui->seedEdit->text().toInt());
+    Con.seed(ui->seedEdit->value());
     updateBoardContents();
     updateStatusBar();
 }
 
 void MainWindow::on_dimensionsButton_clicked()
 {
-    Con.changeDimensions(ui->heightEdit->text().toInt(), ui->widthEdit->text().toInt());
+    Con.changeDimensions(ui->heightEdit->value(), ui->widthEdit->value());
     updateBoardSize();
     updateBoardContents();
     updateStatusBar();
@@ -115,22 +115,19 @@ void MainWindow::on_dimensionsButton_clicked()
 
 void MainWindow::on_startSimButton_clicked()
 {
-    Con.simStart(ui->simIntervalEdit->text().toDouble());
+    Con.simStart(ui->simIntervalEdit->value());
 }
-
 
 void MainWindow::on_stopSimButton_clicked()
 {
     Con.simStop();
 }
 
-
 void MainWindow::on_resetButton_clicked()
 {
     Con.reset(Con.getHeight(), Con.getWidth());
     updateBoardContents();
 }
-
 
 void MainWindow::on_tableWidget_cellClicked(int row, int column)
 {

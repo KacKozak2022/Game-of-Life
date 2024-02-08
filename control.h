@@ -7,7 +7,6 @@
 #include <QApplication>
 #include <QTime>
 #include <QTimer>
-#include <QDebug>
 #include <random>
 
 using namespace std;
@@ -28,18 +27,16 @@ private:
     char** gridCurrent = nullptr;
     char** gridNext = nullptr;
 
-
-
     bool checkState(int row, int col);
     void deallocGrid(char*** tab);
     void allocGrid(char*** tab, int height, int width);
-
 
 public slots:
     void iterate();
 
 public:
     Control();
+    ~Control();
     void changeDimensions(int height, int width);
     void seed(unsigned int entered_seed);
     void loadFromFile();
